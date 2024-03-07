@@ -24,10 +24,9 @@ class RemoteObject extends StatefulWidget {
 
 class _RemoteObjectState extends State<RemoteObject> {
   ArCoreController? arCoreController;
+  ArCoreNode? objectSelected;
   List<ArCoreRotatingNode> objectNodes = [];
   String shape = '';
-
-  String? objectSelected;
 
   Offset objectPosition = Offset(0.0, 0.0);
   double objectScale = 1.0;
@@ -132,7 +131,7 @@ class _RemoteObjectState extends State<RemoteObject> {
     arCoreController?.onPlaneTap = _handleOnPlaneTap;
   }
 
-  void _addObject(ArCoreHitTestResult plane, String shape) {
+  Future _addObject(ArCoreHitTestResult plane, String shape) async {
     final sphere = ArCoreSphere(
       materials: [ArCoreMaterial(color: Colors.blue)],
       radius: 0.1,
